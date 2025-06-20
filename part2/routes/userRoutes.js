@@ -81,17 +81,19 @@ router.post('/logout', (req, res) => {
   });
 });
 router.get('/mydogs', async (req, res) => {
-  try {
-    const ownerId = req.session.user && req.session.user.user_id;
-    if (!ownerId) {
-      return res.status(401).json({ error: 'Not logged in' });
-    }
+  if (!req.session.user || req.session.user.role !== 'owner') {
+    return res.status(403).json({ error: 'Access denied' });
+  }
 
-    const [rows] = await db.query('SELECT dog_id, name FROM Dogs WHERE owner_id = ?', [ownerId]);
+  try {
+    const [rows] = await db.query(
+      `SELECT dog_id, name FROM Dogs WHERE owner_id = ?
+    `, [req.session.user.user_id]);
+
     res.json(rows);
   } catch (err) {
-    console.error('Error fetching owner\'s dogs:', err);
-    res.status(500).json({ error: 'Failed to fetch dogs' });
+    console.error('Error fetching dogs:', err);
+    res.status(500).json({ error: 'Failed to load dogs' });
   }
 });
 

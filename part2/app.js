@@ -20,16 +20,17 @@ app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
 
 
-// POST /logout: Ends session and clears cookie
+// ✅ ESLint-compliant version
 router.post('/logout', (req, res) => {
-  req.session.destroy(err => {
+  req.session.destroy((err) => { // <-- add parentheses around err
     if (err) {
       return res.status(500).json({ error: 'Logout failed' });
     }
-    res.clearCookie('connect.sid'); // Clear session cookie
+    res.clearCookie('connect.sid');
     res.json({ message: 'Logged out' });
   });
 });
+
 
 
 

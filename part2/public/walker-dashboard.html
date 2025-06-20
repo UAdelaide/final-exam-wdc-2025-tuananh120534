@@ -47,11 +47,13 @@
 
     createApp({
       methods: {
+        // Method to log the user out
         async logout() {
           await fetch('/api/users/logout', {
             method: 'POST',
             credentials: 'include',
           });
+          // Redirect the user back to the login page after logout
           window.location.href = '/';
         }
       },

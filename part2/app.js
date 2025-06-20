@@ -20,16 +20,6 @@ app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
 
 
-// ✅ ESLint-compliant version
-router.post('/logout', (req, res) => {
-  req.session.destroy((err) => { // <-- add parentheses around err
-    if (err) {
-      return res.status(500).json({ error: 'Logout failed' });
-    }
-    res.clearCookie('connect.sid');
-    res.json({ message: 'Logged out' });
-  });
-});
 
 
 

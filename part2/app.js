@@ -20,7 +20,7 @@ app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
 
 // GET /api/dogs
-router.get('/', async (req, res) => {
+router.get('/dogs', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM Dogs');
     res.json(rows); // return all dogs

@@ -40,19 +40,28 @@
   </style>
 </head>
 <body>
-<div id="app" class="container py-5">
-    <h1 class="mb-4 text-primary">{{ message }}</h1>
-    <p class="lead">Connect with trusted walkers for your beloved dog!</p>
-    <form @submit.prevent="login_user">
-      <input v-model="username" placeholder="Username" type="text" required><br><br>
-      <input v-model="password" placeholder="Password" type="password" required><br><br>
-      <button type="submit" >Login</button>
-      <p style="color:red" v-if="error">{{ error }}</p>
-    </form>
 
-    <a href="owner-dashboard.html" class="btn btn-outline-primary me-2">Owner Dashboard</a>
-    <a href="walker-dashboard.html" class="btn btn-outline-success">Walker Dashboard</a>
+  <div id="app" class="login-box">
+    <h1>{{ message }}</h1>
+
+    <!-- Vue-controlled form with submit -->
+    <form @submit.prevent="login">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input v-model="username" id="username" type="text" class="form-control" placeholder="Enter username" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input v-model="password" id="password" type="password" class="form-control" placeholder="Enter password" required />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Log In</button>
+
+      <p class="text-danger mt-3 text-center" v-if="error">{{ error }}</p>
+    </form>
   </div>
+
   <script>
     Vue.createApp({
       data() {
@@ -66,7 +75,7 @@
         };
       },
       methods: {
-        async login_user() {
+        async login() {
           try {
             const res = await fetch('/api/users/login', {
               method: 'POST',

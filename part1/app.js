@@ -25,7 +25,7 @@ const db = mysql.createPool({
 });
 
 // ==========================
-// ✅ Question 6: /api/dogs
+//  Question 6: /api/dogs
 // ==========================
 app.get('/api/dogs', async (req, res) => {
   try {
@@ -42,7 +42,7 @@ app.get('/api/dogs', async (req, res) => {
 });
 
 // ========================================
-// ✅ Question 7: /api/walkrequests/open
+// Question 7: /api/walkrequests/open
 // ========================================
 app.get('/api/walkrequests/open', async (req, res) => {
   try {
@@ -66,9 +66,9 @@ app.get('/api/walkrequests/open', async (req, res) => {
   }
 });
 
-// ===========================================
-// ✅ Question 8: /api/walkers/summary
-// ===========================================
+
+// Question 8: /api/walkers/summary
+
 app.get('/api/walkers/summary', async (req, res) => {
   try {
     const [rows] = await db.execute(`

@@ -151,7 +151,7 @@
             const res = await fetch('/api/dogs');
             const dogs = await res.json();
             this.dogs = dogs;
-
+            console.log
             // Get images in parallel
             const imageFetches = dogs.map(() =>
               fetch('https://dog.ceo/api/breeds/image/random')

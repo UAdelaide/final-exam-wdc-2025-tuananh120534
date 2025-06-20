@@ -45,6 +45,7 @@
     <h1>{{ message }}</h1>
 
     <div class="mb-3">
+      <form @submit.prevent="login_user">
       <label for="username" class="form-label">Username</label>
       <input v-model="username" id="username" type="text" class="form-control" placeholder="Enter username" required />
     </div>
@@ -57,6 +58,7 @@
     <button @click="login" class="btn btn-primary w-100">Log In</button>
 
     <p class="text-danger mt-3 text-center" v-if="error">{{ error }}</p>
+    </form>
   </div>
 
   <script>

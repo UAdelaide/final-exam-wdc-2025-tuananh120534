@@ -50,13 +50,13 @@ app.post('/login', async (req, res) => {
       role: rows[0].role
     };
 
-    if (rows[0].role === 'owner') {
-      return res.redirect('/owner-dashboard.html');
-    } else if (rows[0].role === 'walker') {
-      return res.redirect('/walker-dashboard.html');
-    } else {
-      return res.send('Unknown role');
-    }
+if (rows[0].role === 'owner') {
+  return res.redirect('/owner-dashboard.html');
+} else if (rows[0].role === 'walker') {
+  return res.redirect('/walker-dashboard.html');
+} else {
+  return res.send('Unknown role');
+}
 
   } catch (err) {
     console.error('Login error:', err);

@@ -1,3 +1,5 @@
+// login.js - Handles user login and redirection based on role
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('loginForm');
   const errorEl = document.getElementById('error');
@@ -19,18 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!res.ok) {
         errorEl.textContent = data.error || 'Login failed';
+      } else if (data.user.role === 'owner') {
+        window.location.href = '/owner-dashboard.html';
+      } else if (data.user.role === 'walker') {
+        window.location.href = '/walker-dashboard.html';
       } else {
-        if (data.user.role === 'owner') {
-          window.location.href = '/owner-dashboard.html';
-        } else if (data.user.role === 'walker') {
-          window.location.href = '/walker-dashboard.html';
-        } else {
-          errorEl.textContent = 'Unknown role';
-        }
+        errorEl.textContent = 'Unknown user role';
       }
     } catch (err) {
-      console.error(err);
-      errorEl.textContent = 'An error occurred.';
+      console.error('Login error:', err);
+      errorEl.textContent = 'Something went wrong. Please try again.';
     }
   });
 });

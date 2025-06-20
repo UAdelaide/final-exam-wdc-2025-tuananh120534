@@ -78,4 +78,4 @@ VALUES
  ((SELECT dog_id FROM Dogs WHERE name = 'Thinh'), '2025-06-9 16:30:00', 40, 'Zoo', 'accepted'),
  ((SELECT dog_id FROM Dogs WHERE name = 'Bella'), '2025-06-9 10:30:00', 45, 'Beachside Ave', 'accepted'),
  ((SELECT dog_id FROM Dogs WHERE name = 'Thai'), '2025-06-13 13:15:00', 50, 'Botanic Garden', 'open'),
- ((SELECT dog_id FROM Dogs WHERE name = 'Khai'), '2025-06-12 17:00:00', 60, 'Beach', 'open');
+ ((SELECT dog_id FROM Dogs WHERE name = 'Khai'), '2025-06-12 17:00:00', 60, 'Beach', 'cancelled');

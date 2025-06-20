@@ -1,25 +1,3 @@
-const express = require('express');
-const session = require('express-session');
-const mysql = require('mysql2/promise');
-
-const app = express();
-
-const db = await mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'DogWalkService'
-});
-
-app.use(session({
-  secret: 'dog-walking-secret',
-  resave: false,
-  saveUninitialized: false
-}));
-
-app.use(express.json());
-
-// Login route
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   const [rows] = await db.execute(
@@ -38,5 +16,5 @@ app.post('/login', async (req, res) => {
     role: user.role
   };
 
-  res.json({ role: user.role });
+  res.json({ role: user.role }); // ✅ MUST return this JSON
 });

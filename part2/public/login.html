@@ -58,11 +58,11 @@
         const data = await res.json();
 
         if (!res.ok) {
-          // ❌ Show error message if credentials are wrong
+          // Show error message if credentials are wrong
           document.getElementById('error').textContent =
             data.error || 'Login failed';
         } else {
-          // ✅ Redirect based on role
+          // Redirect based on role
           if (data.user.role === 'owner') {
             window.location.href = '/owner-dashboard.html';
           } else if (data.user.role === 'walker') {

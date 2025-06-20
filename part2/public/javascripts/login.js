@@ -17,4 +17,18 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     if (!response.ok) {
       errorDiv.textContent = data.error || 'Login failed';
       errorDiv.classList.remove('d-none');
+          // Redirect based on role
+    if (data.role === 'owner') {
+      window.location.href = '/owner-dashboard.html';
+    } else if (data.role === 'walker') {
+      window.location.href = '/walker-dashboard.html';
+    } else {
+      errorDiv.textContent = 'Unknown role';
+      errorDiv.classList.remove('d-none');
+    }
+  } catch (err) {
+    errorDiv.textContent = 'Server error. Try again.';
+    errorDiv.classList.remove('d-none');
+  }
+});
 

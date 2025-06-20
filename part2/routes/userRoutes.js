@@ -63,7 +63,7 @@ router.post('/login', async (req, res) => {
     res.json({ message: 'Login successfully', role: rows[0].role });
 
   } catch (error) {
-    // Handle unexpected server/database errors
+    // unexpected server/database errors
     res.status(500).json({ error: 'Login failed' });
   }
 });

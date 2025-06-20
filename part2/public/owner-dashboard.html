@@ -85,7 +85,15 @@
     const { createApp, ref, onMounted } = Vue;
 
     createApp({
-
+      methods: {
+        async logout() {
+          await fetch('/api/users/logout', {
+            method: 'POST',
+            credentials: 'include',
+          });
+          window.location.href = '/';
+        }
+      },
       setup() {
         const form = ref({
           dog_id: '',
@@ -157,15 +165,6 @@
           submitWalkRequest,
           myDogs
         };
-      },
-      methods: {
-        async logout() {
-          await fetch('/api/users/logout', {
-            method: 'POST',
-            credentials: 'include',
-          });
-          window.location.href = '/';
-        }
       }
     }).mount('#app');
 

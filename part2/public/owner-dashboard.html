@@ -157,8 +157,8 @@
           submitWalkRequest,
           myDogs
         };
-      }
-            methods: {
+      },
+      methods: {
         async logout() {
           await fetch('/api/users/logout', {
             method: 'POST',
@@ -166,7 +166,7 @@
           });
           window.location.href = '/';
         }
-      },
+      }
     }).mount('#app');
 
   </script>

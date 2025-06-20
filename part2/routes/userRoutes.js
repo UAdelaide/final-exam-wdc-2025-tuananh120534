@@ -37,7 +37,7 @@ router.get('/me', (req, res) => {
 
 // Handle POST request to /login for authenticating a user
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body; // Extract login credentials from request body
+  const { username, password } = req.body; // Extract login credentials
 
   try {
     // Query the Users table to find a user with matching username and password

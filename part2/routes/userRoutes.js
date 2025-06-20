@@ -81,7 +81,7 @@ router.post('/logout', (req, res) => {
   });
 });
 
-
+// GET /mydogs
 router.get('/mydogs', async (req, res) => {
   if (!req.session.user || req.session.user.role !== 'owner') {
     return res.status(403).json({ error: 'Access denied' });

@@ -35,9 +35,7 @@
     <h1 @mouseover="loadDog" style="cursor: pointer;"> Here some pictures of Dogs</h1>
     <img v-if="dogImage" :src="dogImage" alt="Random Dog" class="dog-pic" />
     <p>{{ dogName }}</p>
-    <button @click="loadDog">GET ANOTHER DOG RIGHT NOW</button>
-    <button @click="loadDog">PRESS AGAIN!!!</button>
-    <button @click="loadDog">MORE DOGS!!</button>
+    <button @click="loadDog">ANOTHER DOG</button>
   </div>
 
   <script>

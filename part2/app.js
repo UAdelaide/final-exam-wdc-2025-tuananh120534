@@ -20,10 +20,10 @@ app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
 
 // GET /api/dogs
-router.get('/dogs', async (req, res) => {
+app.get('/api/dogs', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM Dogs');
-    res.json(rows); // return all dogs
+    res.json(rows);
   } catch (err) {
     console.error('Error fetching dogs:', err);
     res.status(500).json({ error: 'Failed to fetch dogs' });

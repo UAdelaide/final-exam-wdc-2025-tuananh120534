@@ -61,7 +61,7 @@ app.post('/login', async (req, res) => {
     } else if (rows[0].role === 'walker') {
       return res.redirect('/walker-dashboard.html');
     } else {
-      return res.send('Invalid');
+      return res.redirect('/login.html?error=1');
     }
 
   } catch (err) {

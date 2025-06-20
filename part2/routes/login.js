@@ -4,15 +4,13 @@ const mysql = require('mysql2/promise');
 
 const app = express();
 
-// Setup DB
 const db = await mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'DogWalkService' // Make sure this matches your DB
+  database: 'DogWalkService'
 });
 
-// Setup sessions
 app.use(session({
   secret: 'dog-walking-secret',
   resave: false,

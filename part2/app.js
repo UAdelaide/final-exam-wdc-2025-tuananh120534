@@ -5,6 +5,21 @@ const session = require('express-session');
 const mysql = require('mysql2/promise');
 const app = express();
 
+// Setup session middleware
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: false
+}));
+
+// Setup MySQL pool
+const db = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'ExampleDB'
+});
+
 // Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));

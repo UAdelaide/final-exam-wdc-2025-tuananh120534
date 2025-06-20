@@ -40,10 +40,9 @@
   </style>
 </head>
 <body>
-
+<form @submit.prevent="login_user">
   <div id="app" class="login-box">
     <h1>{{ message }}</h1>
-    <form @submit.prevent="login_user">
     <div class="mb-3">
       <label for="username" class="form-label">Username</label>
       <input v-model="username" id="username" type="text" class="form-control" placeholder="Enter username" required />

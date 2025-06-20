@@ -67,15 +67,20 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Login failed' });
   }
 });
+// POST /logout: Ends the session and clears the session cookie
 router.post('/logout', (req, res) => {
-  req.session.destroy((err) => { // <-- add parentheses around err
+  req.session.destroy((err) => {
     if (err) {
+      // If there's an error
       return res.status(500).json({ error: 'Logout failed' });
     }
     res.clearCookie('connect.sid');
+
+    // Respond with a success message
     res.json({ message: 'Logged out' });
   });
 });
+
 
 
 

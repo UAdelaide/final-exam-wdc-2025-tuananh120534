@@ -36,23 +36,52 @@ router.get('/me', (req, res) => {
 });
 
 // POST login (dummy version)
+// POST /login using username instead of email
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
     const [rows] = await db.query(`
-      SELECT user_id, username, role FROM Users
-      WHERE email = ? AND password_hash = ?
-    `, [email, password]);
+      SELECT user_id, username, role, password_hash FROM Users
+      WHERE username = ?
+    `, [username]);
 
+    // If no matching user
     if (rows.length === 0) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: 'Invalid username or password' });
     }
 
-    res.json({ message: 'Login successful', user: rows[0] });
+    const user = rows[0];
+
+    // Check password (hashed version with bcrypt)
+    const bcrypt = require('bcrypt');
+    const validPassword = await bcrypt.compare(password, user.password_hash);
+
+    if (!validPassword) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    // Save user info in session
+    req.session.user = {
+      id: user.user_id,
+      username: user.username,
+      role: user.role
+    };
+
+    // Redirect user to appropriate dashboard
+    if (user.role === 'owner') {
+      return res.redirect('/owner-dashboard');
+    } else if (user.role === 'walker') {
+      return res.redirect('/walker-dashboard');
+    } else {
+      return res.status(400).json({ error: 'Unknown user role' });
+    }
+
   } catch (error) {
-    res.status(500).json({ error: 'Login failed' });
+    console.error(error);
+    res.status(500).json({ error: 'Server error during login' });
   }
 });
+
 
 module.exports = router;

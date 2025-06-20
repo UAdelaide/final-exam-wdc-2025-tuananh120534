@@ -1,3 +1,5 @@
+// public/js/login.js
+
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
@@ -17,7 +19,10 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     if (!response.ok) {
       errorDiv.textContent = data.error || 'Login failed';
       errorDiv.classList.remove('d-none');
-          // Redirect based on role
+      return;
+    }
+
+    // Redirect based on user role
     if (data.role === 'owner') {
       window.location.href = '/owner-dashboard.html';
     } else if (data.role === 'walker') {
@@ -26,9 +31,9 @@ document.getElementById('loginForm').addEventListener('submit', async function (
       errorDiv.textContent = 'Unknown role';
       errorDiv.classList.remove('d-none');
     }
+
   } catch (err) {
-    errorDiv.textContent = 'Server error. Try again.';
+    errorDiv.textContent = 'Server error. Please try again.';
     errorDiv.classList.remove('d-none');
   }
 });
-

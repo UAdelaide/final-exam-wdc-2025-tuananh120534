@@ -31,7 +31,6 @@ const userRoutes = require('./routes/userRoutes');
 app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
 
-// ✅ Add login route
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -48,14 +47,17 @@ app.post('/login', async (req, res) => {
         role: user.role
       };
       return res.redirect('/owner-dashboard');
-    } else {
-      return res.send('<p style="color:red">invalid account</p><a href="/">Try again</a>');
     }
+
+    // No else needed
+    return res.send('<p style="color:red">invalid account</p><a href="/">Try again</a>');
+
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');
   }
 });
+
 
 // ✅ Owner Dashboard Page
 app.get('/owner-dashboard', (req, res) => {

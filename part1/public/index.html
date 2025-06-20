@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Express</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
+  <meta charset="UTF-8">
+  <title>Dog App</title>
+  <script src="https://unpkg.com/vue@3"></script>
+  <style>
+    body {
+      background: linear-gradient(45deg, yellow, pink, lime);
+      font-family: cursive;
+      animation: colorchange 5s infinite;
+    }
+    @keyframes colorchange {
+      0% { background-color: red; }
+      50% { background-color: blue; }
+      100% { background-color: red; }
+    }
+    .dog-pic {
+      width: 90vw;
+      height: 80vh;
+      object-fit: cover;
+      border: 10px dashed purple;
+    }
+    button {
+      font-size: 24px;
+      margin: 40px;
+      padding: 20px;
+      background: cyan;
+      color: black;
+      border-radius: 50px;
+    }
+  </style>
 </head>
-
 <body>
-    <h1>Express</h1>
-    <p>Welcome to Express</p>
+  <div id="app">
+    <h1 @mouseover="loadDog" style="cursor: pointer;">🐶 DOG OF THE DAY 🐶</h1>
+    <img v-if="dogImage" :src="dogImage" alt="Random Dog" class="dog-pic" />
+    <p>{{ dogName }}</p>
+    <button @click="loadDog">GET ANOTHER DOG RIGHT NOW</button>
+    <button @click="loadDog">PRESS AGAIN!!!</button>
+    <button @click="loadDog">MORE DOGS!!</button>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          dogImage: '',
+          dogName: 'Doggo McDogface the Third 🐾',
+        }
+      },
+      methods: {
+        async loadDog() {
+          const res = await fetch('https://dog.ceo/api/breeds/image/random');
+          const data = await res.json();
+          this.dogImage = data.message;
+        }
+      },
+      mounted() {
+        this.loadDog();
+      }
+    }).mount('#app');
+  </script>
 </body>
 </html>

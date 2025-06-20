@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dog Walking Login</title>
 
 
@@ -12,34 +13,44 @@
 
   <style>
     body {
-      background-color: #f8f9fa; /* Light background */
+      background-color: #f8f9fa;
+      /* Light background */
     }
+
     .login-box {
       max-width: 400px;
       margin: 5% auto;
       padding: 2rem;
       background-color: #ffffff;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Soft shadow */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      /* Soft shadow */
     }
+
     h1 {
-      color: #007bff; /* Bootstrap primary blue */
+      color: #007bff;
+      /* Bootstrap primary blue */
       font-weight: bold;
       text-align: center;
       margin-bottom: 1.5rem;
     }
+
     .form-control {
-      background-color: #ffffcc; /* Yellow input background */
+      background-color: #ffffcc;
+      /* Yellow input background */
     }
+
     .btn-primary {
       background-color: #007bff;
       border: none;
     }
+
     .btn-primary:hover {
       background-color: #0056b3;
     }
   </style>
 </head>
+
 <body>
 
   <div id="app" class="login-box">
@@ -51,27 +62,15 @@
       <!-- Username Field -->
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
-        <input
-          v-model="username"
-          id="username"
-          type="text"
-          class="form-control"
-          placeholder="Enter username"
-          required
-        />
+        <input v-model="username" id="username" type="text" class="form-control" placeholder="Enter username"
+          required />
       </div>
 
       <!-- Password Field -->
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input
-          v-model="password"
-          id="password"
-          type="password"
-          class="form-control"
-          placeholder="Enter password"
-          required
-        />
+        <input v-model="password" id="password" type="password" class="form-control" placeholder="Enter password"
+          required />
       </div>
 
       <!-- Submit Button -->
@@ -81,6 +80,33 @@
       <p class="text-danger mt-3 text-center" v-if="error">{{ error }}</p>
     </form>
   </div>
+  <!-- All Dogs Table -->
+  <div class="container mt-5">
+    <h3 class="text-center mb-4">All Registered Dogs</h3>
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Dog ID</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Owner ID</th>
+          <th>Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(dog, index) in dogs" :key="dog.dog_id">
+          <td>{{ dog.dog_id }}</td>
+          <td>{{ dog.name }}</td>
+          <td>{{ dog.size }}</td>
+          <td>{{ dog.owner_id }}</td>
+          <td>
+            <img :src="dogImages[index]" alt="Dog photo" style="height: 70px; border-radius: 10px;">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 
   <!-- Script -->
   <script>
@@ -100,7 +126,7 @@
             const res = await fetch('/api/users/login', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              credentials: 'include', 
+              credentials: 'include',
               body: JSON.stringify({
                 username: this.username,
                 password: this.password
@@ -133,4 +159,5 @@
   </script>
 
 </body>
+
 </html>

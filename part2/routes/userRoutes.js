@@ -108,7 +108,7 @@ router.get('/me', (req, res) => {
     return res.status(401).json({ error: 'Not authenticated' });
   }
 
-  // Send the user session info (e.g., user_id, username, role)
+  // Send the user session info
   res.json(req.session.user);
 });
 

@@ -5,6 +5,9 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const dogsRoute = require('./routes/dogs');
+const walkRequestsRoute = require('./routes/walkrequests');
+const walkersRoute = require('./routes/walkers');
 
 var app = express();
 

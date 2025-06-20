@@ -32,7 +32,7 @@
 </head>
 <body>
   <div id="app">
-    <h1 @mouseover="loadDog" style="cursor: pointer;"> Here some pictures of Dogs</h1>
+    <h1 @mouseover="loadDog" style="cursor: pointer;"> Here some pictures of Dogs of the day</h1>
     <img v-if="dogImage" :src="dogImage" alt="Random Dog" class="dog-pic" />
     <p>{{ dogName }}</p>
     <button @click="loadDog">ANOTHER DOG</button>

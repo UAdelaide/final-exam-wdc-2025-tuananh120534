@@ -53,7 +53,6 @@ router.post('/login', async (req, res) => {
     const user = rows[0];
 
     // Check password (hashed version with bcrypt)
-    const bcrypt = require('bcrypt');
     const validPassword = await bcrypt.compare(password, user.password_hash);
 
     if (!validPassword) {

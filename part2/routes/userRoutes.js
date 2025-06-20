@@ -102,13 +102,13 @@ router.get('/mydogs', async (req, res) => {
 });
 
 
-// GET /api/users/me - returns the current logged-in user's session info
+// GET /api/users/me
 router.get('/me', (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ error: 'Not authenticated' });
   }
 
-  // Send the user session info (e.g., user_id, username, role)
+  // Send the user session info
   res.json(req.session.user);
 });
 

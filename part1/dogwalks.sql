@@ -53,7 +53,7 @@ CREATE TABLE WalkRatings (
     FOREIGN KEY (owner_id) REFERENCES Users(user_id),
     CONSTRAINT unique_rating_per_walk UNIQUE (request_id)
 );
--- Insert 5 users
+
 INSERT INTO Users (username, email, password_hash, role)
 VALUES
  ('alice123', 'alice@example.com', 'hashed123', 'owner'),
@@ -62,12 +62,12 @@ VALUES
  ('dominichuynh', 'dom@example.com', 'hashedabc', 'walker'),
  ('tuananh', 'anh@example.com', 'hashedxyz', 'owner');
 
--- Insert 5 dogs (use subqueries to get owner_id from username)
+
 INSERT INTO Dogs (owner_id, name, size)
 VALUES
  ((SELECT user_id FROM Users WHERE username = 'alice123'), 'Max', 'medium'),
- ((SELECT user_id FROM Users WHERE username = 'carol123'), 'Bella', 'small'),
- ((SELECT user_id FROM Users WHERE username = 'alice123'), 'Bau', 'large'),
+ ((SELECT user_id FROM Users WHERE username = 'bob123'), 'Bella', 'small'),
+ ((SELECT user_id FROM Users WHERE username = 'carol123'), 'Bau', 'large'),
  ((SELECT user_id FROM Users WHERE username = 'tuananh'), 'Cua', 'medium'),
  ((SELECT user_id FROM Users WHERE username = 'carol123'), 'Tom', 'small');
 

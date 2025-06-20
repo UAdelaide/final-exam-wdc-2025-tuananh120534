@@ -57,14 +57,13 @@ app.post('/login', async (req, res) => {
     };
 
     // Redirect based on role
-    if (rows[0].role === 'owner') {
-      return res.redirect('/owner-dashboard.html');
-    } else if (rows[0].role === 'walker') {
-      return res.redirect('/walker-dashboard.html');
-    } else {
-      return res.redirect('/login.html?error=1');
-    }
-  } catch (err) {
+if (rows[0].role === 'owner') {
+  return res.redirect('/owner-dashboard.html');
+} else if (rows[0].role === 'walker') {
+  return res.redirect('/walker-dashboard.html');
+} else {
+  return res.redirect('/login.html?error=1');
+} catch (err) {
     console.error('Login error:', err);
     res.status(500).send('Server error');
   }

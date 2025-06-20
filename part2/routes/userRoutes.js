@@ -35,30 +35,39 @@ router.get('/me', (req, res) => {
   res.json(req.session.user);
 });
 
-// POST
+// Handle POST request to /login for authenticating a user
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password } = req.body; // Extract login credentials from request body
 
   try {
+    // Query the Users table to find a user with matching username and password
     const [rows] = await db.query(
       `SELECT user_id, username, role FROM Users
-      WHERE username = ? AND password_hash = ?`
-    , [username, password]);
+       WHERE username = ? AND password_hash = ?`,
+      [username, password]
+    );
 
+    // If no user is found, respond with Unauthorized
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Invalid' });
     }
+
+    // If user is found, store basic user info in the session
     req.session.user = {
       user_id: rows[0].user_id,
       username: rows[0].username,
       role: rows[0].role
     };
 
+    // Respond with success and include the user role (used for redirect)
     res.json({ message: 'Login successfully', role: rows[0].role });
+
   } catch (error) {
+    // Handle unexpected server/database errors
     res.status(500).json({ error: 'Login failed' });
   }
 });
+
 
 
 module.exports = router;

@@ -3,6 +3,15 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
+const session = require('express-session');
+
+app.use(session({
+  secret: 'supersecuresecret', // Change in production
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } // set to true only if using HTTPS
+}));
+
 
 // Middleware
 app.use(express.json());

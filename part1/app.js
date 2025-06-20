@@ -13,7 +13,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/api', dogsRoute);
+app.use('/api', walkRequestsRoute);
+app.use('/api', walkersRoute);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

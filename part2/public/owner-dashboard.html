@@ -81,6 +81,7 @@
     createApp({
       // Logout method in setup()
       methods: {
+        // Method to log the user out
         async logout() {
           await fetch('/api/users/logout', {
             method: 'POST',

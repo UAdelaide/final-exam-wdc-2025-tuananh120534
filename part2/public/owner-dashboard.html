@@ -77,15 +77,16 @@
     const { createApp, ref, onMounted } = Vue;
 
     createApp({
-              // Logout method in setup()
-        methods: {
+      // Logout method in setup()
+      methods: {
         async logout() {
           await fetch('/api/users/logout', {
             method: 'POST',
             credentials: 'include',
           });
           window.location.href = '/';
-        }},
+        }
+      },
       setup() {
 
         const form = ref({

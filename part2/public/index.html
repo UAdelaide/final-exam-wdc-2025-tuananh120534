@@ -97,11 +97,11 @@
             } else if (data.role === 'walker') {
               window.location.href = '/walker-dashboard.html';
             } else {
-              this.error = 'Unknown role';
+              this.error = 'Role Error';
             }
 
           } catch (err) {
-            this.error = 'Server error during login.';
+            this.error = 'Server error';
           }
         }
       }

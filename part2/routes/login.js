@@ -1,32 +1,17 @@
 const express = require('express');
-const session = require('express-session');
+const router = express.Router();
 const mysql = require('mysql2/promise');
-const path = require('path');
 
-const app = express();
-const PORT = 3000;
-
-// MySQL database setup
-const db = await mysql.createPool({
+// You can move db config to a shared file if needed
+const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
   database: 'DogWalkService'
 });
 
-// Middleware
-app.use(express.json());
-app.use(session({
-  secret: 'dog-walk-secret',
-  resave: false,
-  saveUninitialized: false
-}));
-
-// Serve static files (login.html, dashboards, etc.)
-app.use(express.static(path.join(__dirname, '.')));
-
-// Login route
-app.post('/login', async (req, res) => {
+// POST /login route
+router.post('/', async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -40,7 +25,6 @@ app.post('/login', async (req, res) => {
     }
 
     const user = rows[0];
-
     req.session.user = {
       id: user.user_id,
       username: user.username,
@@ -54,15 +38,4 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Session check route (optional for debugging)
-app.get('/api/users/me', (req, res) => {
-  if (!req.session.user) {
-    return res.status(401).json({ error: 'Not logged in' });
-  }
-  res.json(req.session.user);
-});
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+module.exports = router;

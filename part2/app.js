@@ -58,13 +58,13 @@ app.post('/login', async (req, res) => {
 });
 
 
-// ✅ Owner Dashboard Page
+// Owner Dashboard Page
 app.get('/owner-dashboard', (req, res) => {
   if (!req.session.user) return res.redirect('/');
   res.send(`<h2>Welcome, ${req.session.user.username}</h2><p>You are logged in as owner.</p>`);
 });
 
-// ✅ Default home page to render login form (optional if using static index.html)
+// Default home page to render login form (optional if using static index.html)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });

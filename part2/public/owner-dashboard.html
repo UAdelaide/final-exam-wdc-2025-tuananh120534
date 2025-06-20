@@ -11,7 +11,11 @@
   <div id="app" class="container py-4">
     <h1 class="mb-4 text-primary">Owner Dashboard</h1>
     <!-- Logout Button -->
-    <button class="btn btn-danger float-end mb-3">Logout</button>
+    <!-- Form version using @submit -->
+<form @submit.prevent="logout" class="float-end mb-3">
+  <button type="submit" class="btn btn-danger">Logout</button>
+</form>
+
 
 
     <!-- Walk request form -->

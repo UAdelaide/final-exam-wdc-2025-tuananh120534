@@ -16,17 +16,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// ✅ Database connection pool
+
 const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'DogWalkService' // ⛳️ Match your database name from dogwalks.sql
+  database: 'DogWalkService'
 });
 
-// ==========================
-// ✅ Question 6: /api/dogs
-// ==========================
+
+// /api/dogs
+
 app.get('/api/dogs', async (req, res) => {
   try {
     const [rows] = await db.execute(`
@@ -41,9 +41,9 @@ app.get('/api/dogs', async (req, res) => {
   }
 });
 
-// ========================================
-// ✅ Question 7: /api/walkrequests/open
-// ========================================
+
+// /api/walkrequests/open
+
 app.get('/api/walkrequests/open', async (req, res) => {
   try {
     const [rows] = await db.execute(`
@@ -66,7 +66,7 @@ app.get('/api/walkrequests/open', async (req, res) => {
   }
 });
 
-// ===========================================
+
 // ✅ Question 8: /api/walkers/summary
 // ===========================================
 app.get('/api/walkers/summary', async (req, res) => {

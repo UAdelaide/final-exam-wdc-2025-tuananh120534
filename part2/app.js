@@ -49,7 +49,6 @@ app.post('/login', async (req, res) => {
       return res.redirect('/owner-dashboard');
     }
 
-    // No else needed
     return res.send('<p style="color:red">invalid account</p><a href="/">Try again</a>');
 
   } catch (err) {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../../models/db');
+const db = require('../models/db');
 
 // GET /api/dogs - fetch all dogs from the database
 router.get('/', async (req, res) => {

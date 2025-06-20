@@ -120,6 +120,9 @@
           dogImages: []
         };
       },
+      mounted() {
+  this.loadDogs();
+},
       methods: {
         // Called function when submitting
         async loginFunction() {

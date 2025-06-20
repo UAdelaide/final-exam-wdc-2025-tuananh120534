@@ -158,22 +158,22 @@
           } catch (err) {
             this.error = 'Server error'; // Network/server problem
           }
-        }
+        },
         async loadDogs() {
-    try {
-      const res = await fetch('/api/dogs');
-      const data = await res.json();
-      this.dogs = data;
+          try {
+            const res = await fetch('/api/dogs');
+            const data = await res.json();
+            this.dogs = data;
 
-      for (let i = 0; i < data.length; i++) {
-        const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
-        const imgData = await imgRes.json();
-        this.dogImages.push(imgData.message);
-      }
-    } catch (err) {
-      console.error('Failed to load dogs or images', err);
-    }
-  }
+            for (let i = 0; i < data.length; i++) {
+              const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
+              const imgData = await imgRes.json();
+              this.dogImages.push(imgData.message);
+            }
+          } catch (err) {
+            console.error('Failed to load dogs or images', err);
+          }
+        }
       }
     }).mount('#app');
   </script>

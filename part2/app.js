@@ -58,18 +58,17 @@ if (rows[0].role === 'owner') {
   return res.send('Unknown role');
 }
 
+
   } catch (err) {
     console.error('Login error:', err);
     res.status(500).send('Server error');
   }
 });
 
-// ✅ Giữ nguyên các routes gốc
 const walkRoutes = require('./routes/walkRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
 
-// ✅ Export app (nếu dùng test hoặc entry point riêng)
 module.exports = app;

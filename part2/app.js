@@ -1,29 +1,26 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-const db = require('./models/db'); // ✅ dùng db.js
+const db = require('./models/db');
 require('dotenv').config();
 
 const app = express();
 
-// ✅ Middleware
+//  Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/public')));
 
-// ✅ Session
 app.use(session({
   secret: 'secret-key',
   resave: false,
   saveUninitialized: false
 }));
-
-// ✅ Trang mặc định → login
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// ✅ POST /login → check DB và chuyển dashboard
+// ✅ POST /login
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 

@@ -36,7 +36,7 @@
       };
     },
     methods: {
-  async login() {
+    async login() {
     try {
       const res = await fetch('/login', {
         method: 'POST',
@@ -55,19 +55,20 @@
 
       const data = await res.json();
 
-      // Redirect on success
+      // ✅ This logic handles redirection
       if (data.role === 'owner') {
         window.location.href = 'owner-dashboard.html';
       } else if (data.role === 'walker') {
         window.location.href = 'walker-dashboard.html';
       } else {
-        this.error = 'Unknown role';
+        this.error = 'Unknown user role.';
       }
     } catch (e) {
       this.error = 'Server error. Please try again.';
     }
   }
 }
+
 
   }).mount('#app');
 </script>

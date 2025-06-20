@@ -100,7 +100,7 @@
             const res = await fetch('/api/users/login', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              credentials: 'include', // Sends session cookies
+              credentials: 'include', 
               body: JSON.stringify({
                 username: this.username,
                 password: this.password

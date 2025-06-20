@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
       [username, password]
     );
 
-    // If no user is found, respond with Unauthorized
+    // respond with Unauthorized, if its invalid
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Invalid' });
     }
